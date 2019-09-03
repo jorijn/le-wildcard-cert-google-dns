@@ -1,0 +1,14 @@
+#!/bin/bash
+
+WORKDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+docker run -it --name certbot --rm \
+    -v "$WORKDIR/etc/letsencrypt:/etc/letsencrypt" \
+    -v "$WORKDIR/var/lib/letsencrypt:/var/lib/letsencrypt" \
+    -v "$WORKDIR/.secrets:/secrets" \
+    certbot/dns-google \
+    certonly \
+    --dns-google \
+    --dns-google-credentials /secrets/google.json \
+    --server https://acme-v02.api.letsencrypt.org/directory \
+    -d '*.jorijn.com'

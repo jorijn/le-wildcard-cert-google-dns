@@ -11,4 +11,5 @@ docker run -it --name certbot --rm \
     --dns-google \
     --dns-google-credentials /secrets/google.json \
     --server https://acme-v02.api.letsencrypt.org/directory \
+    --dns-google-propagation-seconds 120 \
     -d '*.jorijn.com'
